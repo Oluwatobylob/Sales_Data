@@ -36,15 +36,46 @@ Average sales by Product,
 Top selling product, 
 Best sales region,
 # Data Analysis
-
-
+Below is the sturctured query language I used to analyse the sales data for the retail store
+create database oluwatoblib_db
+select * from [dbo].[book3]
+---retrieve total sales for each product category---
+select product, sum(Total_Sales) as TotalSales from [dbo].[book3]  group by product
+---number of sales transactions in each region---
+select region, count(*) as numberofsalestransaction from [dbo].[book3] group by region 
+---highest selling product by total sales values---
+select top 1 product, sum(Total_Sales) as HighestSellingProduct from [dbo].[book3] group by Product order by 2 desc
+---total Revenue per product---
+select product, sum(total_sales) as TotalRevenue from[dbo].[book3] group by product
+---monthly sales total for the current year---
+select FORMAT(OrderDate, 'yyyy-mm') as sales_month, sum(Total_Sales) as monthly_sales_total
+from [dbo].[book3] where YEAR(OrderDate) = 2024 group by FORMAT(OrderDate, 'yyyy-mm')
+order by FORMAT(OrderDate, 'yyyy-mm')
+---top 5 customers by total purchase amount---
+select top 5 Customer_ID, sum(Total_Sales) as TotalPurchase from [dbo].[book3] group by Customer_Id 
+order by 2 desc
+---percentage of total sales contributed by each region---
+select
+      YEAR(OrderDate) AS SalesYear,
+	  MONTH(OrderDate) AS SalesMonth,
+	  SUM(Total_Sales) AS TotalSales
+From [dbo].[book3]
+Where Year(OrderDate) = YEAR(GETDATE())-----Filter from the current year
+Group by YEAR(OrderDate), MONTH(OrderDate) Order by SalesYear, SalesMonth;
+ ---Products with no sales in the last quarter---
+select product from [dbo].[book3] group by product having 
+sum(case when OrderDate >= '2024-01-01' and OrderDate < '2024-04-01'
+then 1 else 0 end) = 0; -- Q1 of 2024
 
 
 # Data Visualization
 ![sales excel](https://github.com/user-attachments/assets/e43e029a-079f-4bb4-b032-444a90173406)
 
 
+
+
 ![sql sales](https://github.com/user-attachments/assets/98af7a9f-6d97-49a8-9abe-240698b785ef)
+
 
 
 ![sales power bi](https://github.com/user-attachments/assets/d2f9ae16-02cf-4407-9623-f04bf0e5b37f)
