@@ -42,7 +42,11 @@ Best sales region,
 
 # Data Visualization
 ![sales excel](https://github.com/user-attachments/assets/e43e029a-079f-4bb4-b032-444a90173406)
+
+
 ![sql sales](https://github.com/user-attachments/assets/98af7a9f-6d97-49a8-9abe-240698b785ef)
+
+
 ![sales power bi](https://github.com/user-attachments/assets/d2f9ae16-02cf-4407-9623-f04bf0e5b37f)
 
 
